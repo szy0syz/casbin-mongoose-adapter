@@ -1,0 +1,33 @@
+{
+  "name": "js-mongoose-adapter",
+  "version": "1.0.0",
+  "description": "Mongoose adapter for Casbin",
+  "main": "lib/adapter.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szy0syz/js-mongoose-adapter.git"
+  },
+  "author": "szy0syz",
+  "license": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/szy0syz/js-mongoose-adapter/issues"
+  },
+  "homepage": "https://github.com/szy0syz/js-mongoose-adapter#readme",
+  "dependencies": {
+    "casbin": "^1.1.6",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.3.15"
+  }
+}

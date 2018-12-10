@@ -1,7 +1,5 @@
-# mongoose-adapter
+# casbin-mongoose-adapter
 Mongoose adapter for Casbin https://github.com/casbin/node-casbin
-
-====
 
 Mongoose Adapter is the [Mongoose](https://github.com/Automattic/mongoose/) adapter for [Casbin](https://github.com/casbin/node-casbin). With this library, Casbin can load policy from Mongoose supported database or save policy to it.
 
