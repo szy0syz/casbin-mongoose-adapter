@@ -16,9 +16,9 @@ const Adapter = require('../lib/adapter')
 const { Util, Enforcer } = require('casbin')
 const mongoose = require('mongoose');
 const CasbinRule = mongoose.model('CasbinRule');
-CasbinRule.find({}, function(err, docs) {
+CasbinRule.find({}, async function(err, docs) {
   if (err) throw err;
-  if (docs.length > 0) CasbinRule.deleteMany();
+  if (docs.length > 0) await CasbinRule.deleteMany();
 })
 
 function testGetPolicy (e, res) {
@@ -31,21 +31,23 @@ test('TestAdapter', async () => {
   // Because the DB is empty at first,
   // so we need to load the policy from the file adapter (.CSV) first.
   let e = await Enforcer.newEnforcer('examples/rbac_model.conf', 'examples/rbac_policy.csv')
+
   let a = await new Adapter()
   await a.init()
-
-  // Clear the current policy.
-  await e.clearPolicy()
 
   // This is a trick to save the current policy to the DB.
   // We can't call e.savePolicy() because the adapter in the enforcer is still the file adapter.
   // The current policy means the policy in the Node-Casbin enforcer (aka in memory).
   await a.savePolicy(e.getModel())
 
+  // Clear the current policy.
+  await e.clearPolicy()
+
   testGetPolicy(e, [])
 
   // Load the policy from DB.
   await a.loadPolicy(e.getModel())
+
   testGetPolicy(e, [
     ['alice', 'data1', 'read'],
     ['bob', 'data2', 'write'],
@@ -61,6 +63,7 @@ test('TestAdapter', async () => {
   a = await new Adapter()
   await a.init()
   e = await Enforcer.newEnforcer('examples/rbac_model.conf', a)
+
   testGetPolicy(e, [
     ['alice', 'data1', 'read'],
     ['bob', 'data2', 'write'],
