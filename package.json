@@ -1,5 +1,5 @@
 {
-  "name": "js-mongoose-adapter",
+  "name": "casbin-mongoose-adapter",
   "version": "1.0.0",
   "description": "Mongoose adapter for Casbin",
   "main": "index.js",
