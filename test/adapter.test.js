@@ -13,7 +13,7 @@
 // limitations under the License.
 
 const Adapter = require('../lib/adapter')
-const { Util, Enforcer } = require('casbin')
+const { Util, Enforcer, newEnforcer } = require('casbin')
 const mongoose = require('mongoose');
 const CasbinRule = mongoose.model('CasbinRule');
 CasbinRule.find({}, async function(err, docs) {
@@ -30,7 +30,7 @@ function testGetPolicy (e, res) {
 test('TestAdapter', async () => {
   // Because the DB is empty at first,
   // so we need to load the policy from the file adapter (.CSV) first.
-  let e = await Enforcer.newEnforcer('examples/rbac_model.conf', 'examples/rbac_policy.csv')
+  let e = await newEnforcer('examples/rbac_model.conf', 'examples/rbac_policy.csv')
 
   let a = await new Adapter()
   await a.init()
@@ -62,7 +62,7 @@ test('TestAdapter', async () => {
   // newEnforcer() will load the policy automatically.
   a = await new Adapter()
   await a.init()
-  e = await Enforcer.newEnforcer('examples/rbac_model.conf', a)
+  e = await newEnforcer('examples/rbac_model.conf', a)
 
   testGetPolicy(e, [
     ['alice', 'data1', 'read'],
