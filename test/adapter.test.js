@@ -13,7 +13,7 @@
 // limitations under the License.
 
 const Adapter = require('../lib/adapter')
-const { Util, Enforcer, newEnforcer } = require('casbin')
+const { Util, newEnforcer } = require('casbin')
 const mongoose = require('mongoose');
 const CasbinRule = mongoose.model('CasbinRule');
 CasbinRule.find({}, async function(err, docs) {
