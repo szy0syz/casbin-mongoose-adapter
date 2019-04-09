@@ -18,7 +18,7 @@ const Adapter = require('casbin-mongoose-adapter')
 
 ~(async function() {
   // Initialize a Sequelize adapter and use it in a Node-Casbin enforcer:
-  // The adapter will use the MySQL database named "casbin".
+  // The adapter will use the MongoDB database named "casbin".
   // If it doesn't exist, the adapter will create it automatically.
   try {
     const a = await new Adapter('mongodb://localhost/test', {
